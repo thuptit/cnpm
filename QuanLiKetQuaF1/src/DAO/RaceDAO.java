@@ -28,7 +28,7 @@ public class RaceDAO extends DAOConnect{
             while(rs.next()){
                 RaceModel race = new RaceModel();
                 race.setId(rs.getInt("ID"));
-                race.setName(rs.getString("Name"));
+                race.setName(rs.getString("RaceName"));
                 race.setAddress(rs.getString("Address"));
                 race.setStartTime(rs.getDate("StartTime"));
                 race.setEndTime(rs.getDate("EndTime"));

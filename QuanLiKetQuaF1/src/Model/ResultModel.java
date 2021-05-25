@@ -18,16 +18,16 @@ public class ResultModel implements Serializable{
     private int racerTeamId;
     private String username;
     private int userId;
-    private int LapNumber;
-    private Time time;
-    private int status;
+    private String LapNumber;
+    private String time;
+    private String status;
     private String racerName;
 
     public ResultModel() {
         super();
     }
 
-    public ResultModel(String raceName, String racerTeamName, String username, int LapNumber, Time time, int status, String racerName) {
+    public ResultModel(String raceName, String racerTeamName, String username, String LapNumber, String time, String status, String racerName) {
         this.raceName = raceName;
         this.racerTeamName = racerTeamName;
         this.username = username;
@@ -36,7 +36,7 @@ public class ResultModel implements Serializable{
         this.status = status;
         this.racerName = racerName;
     }
-    
+
     public int getId() {
         return Id;
     }
@@ -93,27 +93,27 @@ public class ResultModel implements Serializable{
         this.userId = userId;
     }
 
-    public int getLapNumber() {
+    public String getLapNumber() {
         return LapNumber;
     }
 
-    public void setLapNumber(int LapNumber) {
+    public void setLapNumber(String LapNumber) {
         this.LapNumber = LapNumber;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -124,5 +124,6 @@ public class ResultModel implements Serializable{
     public void setRacerName(String racerName) {
         this.racerName = racerName;
     }
+
     
 }

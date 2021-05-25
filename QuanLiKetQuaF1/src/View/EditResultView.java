@@ -5,7 +5,15 @@
  */
 package View;
 
+import Controller.TableController;
+import DAO.ResultDAO;
+import Model.ResultModel;
+import Model.ResultDTO;
 import Model.UserModel;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import java.sql.Time;
 
 /**
  *
@@ -14,17 +22,32 @@ import Model.UserModel;
 public class EditResultView extends javax.swing.JFrame {
     private String raceName;
     private UserModel user;
+    private ArrayList<ResultModel> listResult;
+    private int raceId;
+    public static String Complete = "Hoàn thành";
+    public static String InComplete = "Chưa hoàn thành";
     /**
      * Creates new form EditResultView
      */
-    public EditResultView(UserModel user, String raceName) {
+    public EditResultView(UserModel user, int raceId, String raceName) {
         initComponents();
         this.user = user;
         this.raceName = raceName;
+        this.raceId = raceId;
         jButton1.setText("Xin chào " + this.user.getUsername()+"!");
         jTextField1.setText("Cập nhật kết quả chặng đua "+this.raceName);
+        this.listResult = getListResult();
+        setTableModel();
     }
-
+    
+    private ArrayList<ResultModel> getListResult(){
+        ResultDAO resultDAO = new ResultDAO();
+        return resultDAO.getListResult(raceId);
+    }
+    private void setTableModel(){
+        TableController tableController = new TableController(listResult);
+        jTable1.setModel(tableController);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,10 +57,37 @@ public class EditResultView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jDialog2 = new javax.swing.JDialog();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
+        jDialog2.getContentPane().setLayout(jDialog2Layout);
+        jDialog2Layout.setHorizontalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog2Layout.setVerticalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,36 +103,234 @@ public class EditResultView extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton2.setText("Lưu");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Hủy");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jTextField1.setText("jTextField1");
+        jTextField1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jTextField1.setEnabled(false);
+
+        jButton5.setText("Trở lại");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(89, 89, 89))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(165, 165, 165))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1)
-                .addGap(34, 34, 34)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton5))
+                .addGap(18, 18, 18)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addGap(0, 19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+	int cancel = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn hủy?", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+        if(cancel == JOptionPane.OK_OPTION){
+            listResult = getListResult();
+            setTableModel();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        (new UpdateResultView(user)).setVisible(true);
+            this.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        handleRequest();
+    }//GEN-LAST:event_jButton2ActionPerformed
+    
+    private void handleRequest(){
+        int rows = jTable1.getRowCount();
+        if(checkAllData() == true){
+            ArrayList<ResultDTO> model = new ArrayList<>();
+            for(int j = 0 ; j < rows ;j ++){
+                model.add(getDataRow(j));
+            }
+
+            ResultDAO rs = new ResultDAO();
+            boolean res = rs.UpdateResult(model);
+            if(res == true){
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+                (new HomeManagerView(user)).setVisible(true);
+                this.dispose();
+            }
+            else
+                JOptionPane.showMessageDialog(this, "Có lỗi xảy ra!");
+        }
+    }
+    private boolean checkAllData(){
+        int rows = jTable1.getRowCount();
+        boolean check = true;
+        for(int i = 0 ; i < rows ; i++){
+            String ID = jTable1.getValueAt(i, 0).toString();
+            int x = checkValueRow(i, 3);
+            if(x == 1){
+                JOptionPane.showMessageDialog(this, "Dòng có ID là: "+ID+", cột số vòng đua chỉ có thể nhập giá trị > 0 và <= 56!");
+                check = false;
+                break;
+            }
+            else if(x == 0){
+                JOptionPane.showMessageDialog(this, "Dòng có ID là: "+ID+", cột số vòng đua chỉ được phép nhập số lớn hơn 0 và nhỏ hơn hoặc bằng 56!");
+                check = false;
+                break;
+            } else if(x == -1){
+                JOptionPane.showMessageDialog(this, "Dòng có ID là: " + ID + " không được phép để trống!");
+                check = false;
+                break;
+            }
+
+            int y = checkValueRow(i, 4);
+            if(y == 3){
+                JOptionPane.showMessageDialog(this, "Dòng có ID là: "+ID+", cột thời gian đang bị nhập sai định dạng!");
+                check = false;
+                break;
+            }else if(y == -1){
+                JOptionPane.showMessageDialog(this, "Dòng có ID là: " + ID + " không được phép để trống!");
+                check = false;
+                break;
+            }
+
+            int z = checkValueRow(i, 5);
+            if(z == 6){
+                JOptionPane.showMessageDialog(this, "Dòng có ID là: "+ID+", cột trạng thái chỉ có thể nhập Hoàn thành hoặc Chưa hoàn thành!");
+                check = false;
+                break;
+            }else if(z == -1){
+                JOptionPane.showMessageDialog(this, "Dòng có ID là: " + ID + " không được phép để trống!");
+                check = false;
+                break;
+            }
+            else{
+                if(jTable1.getValueAt(i, 5).toString().equalsIgnoreCase(Complete)){
+                    if(jTable1.getValueAt(i, 3) != null){
+                        if(Integer.parseInt(jTable1.getValueAt(i, 3).toString()) < 56){
+                            JOptionPane.showMessageDialog(this, "Dòng có ID là: "+ID+", cột trạng thái không thể là Hoàn thành khi số vòng đua < 56!");
+                            check = false;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return check;
+    }
+    private int checkValueRow(int row, int col){
+        switch(col){
+            case 3:
+                if(jTable1.getValueAt(row, col) == null || jTable1.getValueAt(row, col).toString().equalsIgnoreCase("")) return -1;
+                Integer lapNumber = Integer.parseInt(jTable1.getValueAt(row, col).toString());
+                if(lapNumber instanceof Integer){
+                    if(lapNumber > 56 || lapNumber <= 0)
+                        return 1;
+                    else
+                        return 2;
+
+                }
+                return 0;
+            case 4:
+                if(jTable1.getValueAt(row, col) == null || jTable1.getValueAt(row, col).toString().equalsIgnoreCase("")) return -1;
+                String t = jTable1.getValueAt(row, col).toString();
+                if(t instanceof String){
+                    try{
+                        Time time = Time.valueOf(t);
+                        if(time instanceof Time){
+
+                            return 4;
+                        }
+                    }catch(Exception e){
+                        System.out.println(e.toString());
+                        return 3;
+                    }
+                }
+                return 3;
+            case 5:
+                if(jTable1.getValueAt(row, col) == null || jTable1.getValueAt(row, col).toString().equalsIgnoreCase("")) return -1;
+                String st = jTable1.getValueAt(row, col).toString();
+                if(st instanceof String){
+                    if(st.equalsIgnoreCase(Complete) || st.equalsIgnoreCase(InComplete)){
+                        return 5;
+                    }
+                }
+                return 6;
+            default:
+                return 10;
+        }
+    }
+    private ResultDTO getDataRow(int row){
+        ResultDTO model = new ResultDTO();
+        model.setId(Integer.parseInt(jTable1.getValueAt(row, 0).toString()));
+        model.setLapNumber(Integer.parseInt(jTable1.getValueAt(row, 3).toString()));
+        model.setTime(Time.valueOf(jTable1.getValueAt(row, 4).toString()));
+        if(jTable1.getValueAt(row, 5).toString().equalsIgnoreCase(Complete))
+            model.setStatus(1);
+        else
+            model.setStatus(2);
+        return model;
+    }
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;

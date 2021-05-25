@@ -15,12 +15,27 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TableController extends AbstractTableModel{
     private ArrayList<ResultModel> listResult;
-    private final Class[] mClasses = {Integer.class, String.class, String.class, Integer.class, String.class, Integer.class};
+    private final Class[] mClasses = {Integer.class, String.class, String.class, String.class, String.class, String.class};
     private final String[] columnNames = {"ID", "Tên tay đua", "Tên chặng đua", "Số vòng đua", "Thời gian", "Trạng thái"};
+
+    public TableController(ArrayList<ResultModel> listResult) {
+        this.listResult = listResult;
+    }
     
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        super.setValueAt(aValue, rowIndex, columnIndex); //To change body of generated methods, choose Tools | Templates.
+        ResultModel rs = listResult.get(rowIndex);
+        switch(columnIndex){
+            case 3:
+                rs.setLapNumber((String) aValue);
+                break;
+            case 4:
+                rs.setTime((String) aValue);
+                break;
+            case 5:
+                rs.setStatus((String) aValue);
+                break;
+        }
     }
 
     @Override
@@ -64,7 +79,7 @@ public class TableController extends AbstractTableModel{
             case 3: 
                 return rs.getLapNumber();
             case 4:
-                return rs.getTime().toString();
+                return rs.getTime() ;
             case 5:
                 return rs.getStatus();
             default:
